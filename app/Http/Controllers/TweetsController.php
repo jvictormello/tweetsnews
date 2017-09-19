@@ -13,7 +13,7 @@ class TweetsController extends Controller {
         
     }
     
-    public function consultarTweets ($hashtag) {
+    public function consultarTweets () {
         /*
          * Com base na hashtag recebida, realizar a consulta
          * Obter quantidade ou tweets totais
@@ -23,6 +23,8 @@ class TweetsController extends Controller {
          * Exibir em tela o total de tweets e os top 3 tweets
          */
         
+        //dd(\Request::all());
+
         $tweet = new Tweets();
         
         try {

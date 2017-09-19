@@ -30,12 +30,13 @@
     </head>
     <body>
     	<div class="container">
-    		<form action="">
+    		<form action="{{action('TweetsController@consultarTweets')}}" method="POST" enctype="multipart/form-data">
+    			<input type="hidden" name="_token" value="{{csrf_token()}}">
 		    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 my-5">
 		    		<div class="input-group has-error">
-						<input type="text" class="form-control" placeholder="Digite a hashtag...">
+						<input type="text" class="form-control" name="filter[hashtag]" placeholder="Digite a hashtag...">
 							<span class="input-group-btn">
-								<button class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+								<button class="btn btn-secondary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 							</span>
 		            </div><!-- /input-group -->
 		    	</div>
