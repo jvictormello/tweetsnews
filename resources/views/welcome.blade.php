@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>JVictorMello/TweetsNews</title>
         
         <link rel="stylesheet" href="{{asset('/css/bootstrap-grid.min.css')}}">
         <link rel="stylesheet" href="{{asset('/css/bootstrap-reboot.min.css')}}">
@@ -26,9 +26,30 @@
             	color: #1da1f2;
             }
             input[type="text"]{padding: 5px 10px 8px;}
+            #loading-img {
+                text-align: center;
+                padding-top: 30%;
+                z-index: 5000;
+                font-size: 30px;
+            }
+            .overlay {
+                position: fixed;
+                z-index: 4999;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: #e9e9e9;
+                opacity: 0.8;
+                overflow: hidden;
+            }
         </style>
     </head>
     <body>
+    	<div id="loading-img" class="overlay" style="display: none;"> 
+			<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+			 Carregando, por favor aguarde...
+		</div>
     	<div class="container">
     		<form action="{{action('TweetsController@consultarTweets')}}" method="POST" enctype="multipart/form-data">
     			<input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -36,7 +57,7 @@
 		    		<div class="input-group has-error">
 						<input type="text" class="form-control" name="filter[hashtag]" placeholder="Digite a hashtag..." value="{{\Request::has('filter') ? \Request::get('filter')['hashtag'] : null }}">
 							<span class="input-group-btn">
-								<button class="btn btn-secondary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+								<button class="btn btn-secondary" type="submit" onclick="showOverlay();"><i class="fa fa-search" aria-hidden="true"></i></button>
 							</span>
 		            </div><!-- /input-group -->
 		    	</div>
@@ -72,7 +93,20 @@
 	            @endif
     		</form>
     	</div>
-    	
-   
     </body>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        	hideOverlay();
+    	});
+        
+        function showOverlay(){
+        	$('body').css('overflow-y', 'hidden');
+        	$("#loading-img").show();
+        }
+    
+        function hideOverlay(){
+        	$('body').css('overflow-y', 'auto');
+        	$("#loading-img").hide();
+        }
+    </script>
 </html>
