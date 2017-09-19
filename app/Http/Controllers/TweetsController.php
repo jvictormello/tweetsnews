@@ -35,13 +35,21 @@ class TweetsController extends Controller {
             $next_results = "";
             $dataInicial = Carbon::now(-3)->subHours(12)->toDateString();
             
+            $listaRetweets = array();
+            
             while (true) {
                 $result = \Twitter::getSearch([
                     'q' => $hashtag,
                     'count' => 100,
                     'max_id' => $next_results,
-                    'since' => $dataInicial
+                    //'since' => $dataInicial
                 ]);
+                
+                foreach ($result->statuses as $tweet) {
+                    if ($tweet->retweet_count > 0) {
+                        $listaRetweets[$tweet->retweet_count] = array($tweet->text, '@'.$tweet->user->screen_name);
+                    }
+                }
                 
                 $ids+=count($result->statuses);
                 
@@ -53,19 +61,21 @@ class TweetsController extends Controller {
                 }
             }
             
+            krsort($listaRetweets);
+            
             $hashtag = explode("#", $hashtag)[1];
             
-            $tweet = new Tweets();
-            $tweet->hashtag = $hashtag;
-            $tweet->total = $ids;
+            $buscaTweet = new Tweets();
+            $buscaTweet->hashtag = $hashtag;
+            $buscaTweet->total = $ids;
             
             try {
-                $tweet->save();
+                $buscaTweet->save();
             } catch (\Exception $e) {
                 return $e;
             }
             
-            return view('welcome')->with('total', $ids);
+            return view('welcome')->with('total', $ids)->with('listaRetweets', array_slice($listaRetweets, 0, 3));
         } else {
             return view('welcome');
         }

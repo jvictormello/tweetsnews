@@ -45,18 +45,26 @@
 			    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4 qtd-tweets">
 			           	<h4 class="text-center"><i class="fa fa-twitter" aria-hidden="true"></i> Essa hashtag foi utilizada em <span>{{$total}}</span> tweets.</h4>
 		            </div>
-			    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4">
-		            	<ul class="list-group mx-auto">
-							<li class="list-group-item text-center">
-								<h5 class="m-0">
-									<i class="fa fa-twitter" aria-hidden="true"></i> Top 3 Retweets
-								</h5>
-							</li>
-							<li class="list-group-item">Cras justo odio</li>
-							<li class="list-group-item">Dapibus ac facilisis in</li>
-							<li class="list-group-item">Morbi leo risus</li>
-		            	</ul>
-		            </div>
+		            @if(count($listaRetweets) > 0)
+    			    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4">
+    		            	<ul class="list-group mx-auto">
+    							<li class="list-group-item text-center">
+    								<h5 class="m-0">
+    									@if (count($listaRetweets) == 1)
+    										<i class="fa fa-twitter" aria-hidden="true"></i> Tweet mais Retweetado
+    									@else
+    										<i class="fa fa-twitter" aria-hidden="true"></i> Top {{count($listaRetweets)}} Retweets
+    									@endif
+    								</h5>
+    							</li>
+    							@foreach ($listaRetweets as $retweet)
+        							<li class="list-group-item">
+        								<h6>{{$retweet[0]}} </h6><small class="text-muted">{{$retweet[1]}}</small></li>
+    							@endforeach
+    		            	</ul>
+    		            </div>
+    				@endif
+		            
 	            @else
 	            	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4 qtd-tweets">
 			           	<h4 class="text-center"><i class="fa fa-twitter" aria-hidden="true"></i> Digite a <span>HashTag</span> para consultar os tweets.</h4>
