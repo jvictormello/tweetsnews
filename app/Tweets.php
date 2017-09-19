@@ -1,10 +1,15 @@
 <?php
 
-use Illuminate\Database\Eloquent\Model;
+namespace App;
 
-class Tweets extends Model
+use \Eloquent;
+
+class Tweets extends Eloquent
 {
-    //
+    
+    public function __construct() {
+        $this->connection = 'mysql';
+    }
     
     protected $table = 'tweets';
     

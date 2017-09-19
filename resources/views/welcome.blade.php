@@ -34,15 +34,16 @@
     			<input type="hidden" name="_token" value="{{csrf_token()}}">
 		    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 my-5">
 		    		<div class="input-group has-error">
-						<input type="text" class="form-control" name="filter[hashtag]" placeholder="Digite a hashtag...">
+						<input type="text" class="form-control" name="filter[hashtag]" placeholder="Digite a hashtag..." value="{{\Request::has('filter') ? \Request::get('filter')['hashtag'] : null }}">
 							<span class="input-group-btn">
 								<button class="btn btn-secondary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 							</span>
 		            </div><!-- /input-group -->
 		    	</div>
-		    	@if(1==1)
+		    	
+		    	@if(isset($total))
 			    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4 qtd-tweets">
-			           	<h4 class="text-center"><i class="fa fa-twitter" aria-hidden="true"></i> Essa hashtag foi utilizada em <span>10</span> tweets.</h4>
+			           	<h4 class="text-center"><i class="fa fa-twitter" aria-hidden="true"></i> Essa hashtag foi utilizada em <span>{{$total}}</span> tweets.</h4>
 		            </div>
 			    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4">
 		            	<ul class="list-group mx-auto">
@@ -55,6 +56,10 @@
 							<li class="list-group-item">Dapibus ac facilisis in</li>
 							<li class="list-group-item">Morbi leo risus</li>
 		            	</ul>
+		            </div>
+	            @else
+	            	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-4 qtd-tweets">
+			           	<h4 class="text-center"><i class="fa fa-twitter" aria-hidden="true"></i> Digite a <span>HashTag</span> para consultar os tweets.</h4>
 		            </div>
 	            @endif
     		</form>
