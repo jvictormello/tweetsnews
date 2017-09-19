@@ -1,6 +1,11 @@
 {
 	"name" : "laravel/laravel",
 	"description" : "The Laravel Framework.",
+	"author" : [{
+			"name" : "João Victor  Morais de Mello",
+			"email" : "jvictor.mello@gmail.com"
+		}
+	],
 	"keywords" : [
 		"framework",
 		"laravel"

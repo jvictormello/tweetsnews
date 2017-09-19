@@ -1,53 +1,31 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+## TweetViews - Tutorial:
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+https://github.com/jvictormello/tweetsnews
 
-## About Laravel
+Para correta utilização do software e configuração, será necessário ter um servidor Apache instalado no Sistema Operacional, PHP 7.1.*. e banco de dados MySQL.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+1- Realizar download do código fonte disponível em: https://github.com/jvictormello/tweetsnews, salvá-lo num único diretório, renomeá-lo como "tweetsnews" e colocá-lo dentro da pasta de publicação do servidor
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+2- Acessar o SGBD utilizado para configuração do MySQL e criar um Schema com os seguintes dados:
+	* Nome da Base de Dados - tweetsnews
+	* Agrupamento (Collation) - utf8_bin
+*OBS.: Muito importante não realizar a criação de nenhuma tabela, pois esse procedimento será realizado via artisan
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+3- Agora é necessário acessar o diretório com o código que está no servidor e abrir o arquivo ".env", que deve ter os seguintes dados editados para que a conexão com o BD ocorra:
+	* DB_CONNECTION=mysql
+	* DB_HOST= Colocar o somente IP de conexão ao banco ou deixar "127.0.0.1" se for localhost
+	* DB_PORT=3306 
+	* DB_DATABASE=tweetsnews
+	* DB_USERNAME= Colocar somente a o usuário de acesso à base (se for root, colocar root)
+	* DB_PASSWORD= Colocar somente a senha de acesso à base (deixar em branco se não tiver senha)
 
-## Learning Laravel
+4- Após a criação da Base de Dados "tweetsnews" acessar via terminal o diretório raiz do sistema "tweetsnews" o seguinte comando "composer dump-autoload"
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+5- Em seguida e ainda através do terminal, rodar o comando "php artisan migrate" que criará tabelas na Base de Dados
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+6- Ainda dentro da raiz do sistema "tweetsnews" via terminal, deve-se rodar o comando "composer install", para garantir que todas as dependências sejam instaladas (mesmo a pasta Vendor estando versionada junto com o código);
 
-## Laravel Sponsors
+7- Terminando a execução do comando anterior, deve-se rodar o seguinte comando "composer update" para que alguma dependências novas sejam instaladas ou as atuais sejam atualizadas;
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
-
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+8- Reiniciar o servidor onde o projeto "tweetsnews" está hospedado e acessar pelo navegador fornecendo o IP "http://IP_SERVIDOR/tweetsnews/public".
+Caso esteja utilizando localmente, subir o servidor apache e acessar pelo navegador como "http://localhost/tweetsnews/public".
