@@ -9,7 +9,7 @@ class TweetsController extends Controller {
     
     public function index() {
         /* 
-         * Carregar tela Inicial com campo para digitação e botão de ação Consultar
+         * Carregar tela Inicial com campo para digitaï¿½ï¿½o e botï¿½o de aï¿½ï¿½o Consultar
          */
         
     }
@@ -42,7 +42,7 @@ class TweetsController extends Controller {
                     'q' => $hashtag,
                     'count' => 100,
                     'max_id' => $next_results,
-                    //'since' => $dataInicial
+                    'since' => $dataInicial
                 ]);
                 
                 foreach ($result->statuses as $tweet) {

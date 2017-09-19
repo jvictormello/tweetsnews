@@ -80,7 +80,7 @@
     							</li>
     							@foreach ($listaRetweets as $retweet)
         							<li class="list-group-item">
-        								<h6>{{$retweet[0]}} </h6><small class="text-muted">{{$retweet[1]}}</small></li>
+        								<p>{{$retweet[0]}} </p><footer class="blockquote-footer">{{$retweet[1]}}</footer></li>
     							@endforeach
     		            	</ul>
     		            </div>
